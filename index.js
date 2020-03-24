@@ -10,23 +10,20 @@ const app = express();
 }); */
 
 const PORT = 4000;
-/* const handleListening = () =>{
 
-} */
-
-const handleListening = function(){
+/* const handleListening = function(){
     console.log(`Listening on: http://localhost:${PORT}`);
-}
-
-const handleHome = function(req,res){
-    console.log(req);
-    res.send('Hello from home');
-}
-
-/* const handleProfile = function(req,res){
+} const handleHome = function(req, res) {
+  res.send("Hello from home");
+};
+ const handleProfile = function(req,res){
     res.send("You are on my profile");
 } */
-// 위의 함수를 밑의 한줄로 수정하였다. 둘다 같은 의미인데 다른 방식을 사용한 것 뿐이다.
+// 위의 함수들을 arrow_function 방식으로 수정하였다. 둘다 같은 의미인데 다른 방식을 사용한 것 뿐이다. js의 arrow_function 방식이다.
+const handleListening = () => console.log(`Listening on: http://localhost:${PORT}`);
+
+const handleHome = (req,res) => res.send('Hello from home');
+
 const handleProfile = (req, res) => res.send("You are on my profile");
 
 app.get("/",handleHome);
