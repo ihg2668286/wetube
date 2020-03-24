@@ -23,9 +23,11 @@ const handleHome = function(req,res){
     res.send('Hello from home');
 }
 
-const handleProfile = function(req,res){
+/* const handleProfile = function(req,res){
     res.send("You are on my profile");
-}
+} */
+// 위의 함수를 밑의 한줄로 수정하였다. 둘다 같은 의미인데 다른 방식을 사용한 것 뿐이다.
+const handleProfile = (req, res) => res.send("You are on my profile");
 
 app.get("/",handleHome);
 
