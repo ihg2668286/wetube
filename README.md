@@ -4,6 +4,10 @@ Cloning Youtube with Vanilla and NodeJS
 
 git studuy
 
+git add .
+git commit -m "수정한내용"
+git push origin master
+
 package.json파일의 scripts 안에 start를 넣음으로써 node index.js 를 치지않고 npm start 만으로도 localhost:4000에 접속하도록 만들었다.
 
 POST request가 정보를 서버로 전달
@@ -45,4 +49,26 @@ npm install nodemone --D 를 함으로써 수동으로 재시작을 하던것을
 
     globalRouter.js를 사용하여서 data의 모습에 맞춰서 URL과 함수를 분리하였다.
     (home,login,logout,search,join)
+
+    controller생성 - 대개 프로젝트에 있는 각 모델마다 컨트롤러를 만들게 된다.
+        // TODO 댓글창을 비디오컨트롤러에 넣을 예정이다.
+        globalRouter.js의 내용을 수정해서 임포트 넣었다.
+
+    cookieParser
+        cookie를 전달받아서 사용할 수 있도록 만들어주는 미들웨어. 사용자 인증 같은곳에서 쿠키를 검사할 때 사용해야 한다.
+    bodyParser
+        사용자가 웹사이트로 전달하는 정보들을 검사하는 미들웨어. requsest 정보에서 form이나 json 형태로 된 body를 검사한다.
+        아바타의 사진이나 비디오를 업로드 할 때, 제목이나 댓글 같은 정보를 전달할 때 form에 담아서 업로드 해야한다.
+    helmet
+        application이 더 안전하도록 만들어준다.
+    morgan
+        application에서 발생하는 모든 일들을 logging 하는 것이다.
+
+    pug를 이용해서 layout생성
+        header를 수정하기 위해서 모든 탬플릿을 수정할 수는 없기에 layout생성
+        pug에서 html만들때에는 <>를 넣어서 태그를 만들지 않는다. only 들여쓰기로 만들어 낸다.
+        ex)<p>blablabla</p> 같은 경우에는
+            p
+                blablabla
+        이런식으로 단순히 들여쓰기로만 표현한다. 또한 /를 이용해서 닫지 않는다.
 }

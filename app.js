@@ -12,6 +12,7 @@ import routes from "./routes";
 // babel을 install 하여서 위의 주석처리된 문장을 밑의 문장으로 바꾸었다. 이렇게 함으로써 package.json의 start에서 node index.js라는 문장 역시 babel-node index.js라는 문장으로 수정하였다.
 // 이렇게 함으로써 최신 js코드(지금도 최신인가?)로 수정하였다.
 const app = express();
+app.set('view engine',"pug");
 // const PORT = 4000;
 
 /* const handleListening = function(){
