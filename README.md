@@ -33,4 +33,16 @@ npm install nodemone --D 를 함으로써 수동으로 재시작을 하던것을
     router는 많은 route들이 담긴 파일
 
     export와 import의 사용법? 학습
+
+    MVC
+        Model - data(데이터)
+        View - how does the look (데이터가 어떻게 생겼는지)
+        Controller - function that looks for the data (데이터를 보여주는?찾는? 함수)
+    
+    router->userRouter으로 수정
+    변수에 export하면 그 변수만 export한다는 것
+    export default는 파일로 export를 한다는 것
+
+    globalRouter.js를 사용하여서 data의 모습에 맞춰서 URL과 함수를 분리하였다.
+    
 }

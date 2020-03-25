@@ -3,7 +3,9 @@ import morgan from "morgan";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
-import {userRouter} from "./router"
+import userRouter from "./routers/userRouter";
+import videoRouter from "./routers/videoRouter";
+import globalRouter from "./routers/globalRouter";
 
 // const express = require("express");
 // babel을 install 하여서 위의 주석처리된 문장을 밑의 문장으로 바꾸었다. 이렇게 함으로써 package.json의 start에서 node index.js라는 문장 역시 babel-node index.js라는 문장으로 수정하였다.
@@ -22,9 +24,9 @@ const app = express();
 // 위의 함수들을 arrow_function 방식으로 수정하였다. 둘다 같은 의미인데 다른 방식을 사용한 것 뿐이다. js의 arrow_function 방식이다.
 // const handleListening = () => console.log(`Listening on: http://localhost:${PORT}`);
 
-const handleHome = (req,res) => res.send('Hello from home');
+// const handleHome = (req,res) => res.send('Hello from home');
 
-const handleProfile = (req, res) => res.send("You are on my profile");
+// const handleProfile = (req, res) => res.send("You are on my profile");
 
 // .....이부분에 원하는 middleware를 추가하고 그 다음에 route를 추가한다. 순서는 매우 중요하다.
 app.use(cookieParser());
@@ -37,7 +39,7 @@ app.use(morgan("dev"));
   res.send("not happening");
 } */
 
-app.get("/", handleHome);
+// app.get("/", handleHome);
 // app.get("/", betweenHome, handleHome);
 // 위처럼 전역적으로 middleware를 둘 수 있는 방법도 있다.
 
@@ -46,13 +48,13 @@ app.get("/", handleHome);
 
 // 만약 이부분에(profile의 바로전단계) middleware를 추가하면 그것은 profile에 가기전에만 실행될 것이다. 위의 /부분에서는 실행되지 않는다는 의미이다.
 
-app.get("/profile",handleProfile);
+// app.get("/profile",handleProfile);
 
 // app.listen(PORT, handleListening);
 
+app.use("/",globalRouter);
 app.use("/user",userRouter);
-// 하나의 route를 쓰는 대신 router를 가져다가 쓴다. 그래서 import를 했으며 router.js에서 export를 했다.
-// router에서 import를 한 방식과 다른것은 export에서 default를 했느냐 안했느냐이다. router에서 사용한 import는 export에서 default로 export하였기 때문에 일반적으로 import하는 방식으로 사용하였으나, 여기서는 그러지 않았다.
+app.use("/video",videoRouter);
 // get이 아니라 use를 사용한 이유는 누군가/user 경로에 접속하면 이 router전체를 사용하겠다는 의미이다.
 
 export default app;   //누군가 내파일을 불러올 때 app object를 주겠다는 의미
