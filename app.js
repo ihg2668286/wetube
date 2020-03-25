@@ -1,14 +1,14 @@
-// const express = require("express");
-// babel을 install 하여서 위의 주석처리된 문장을 밑의 문장으로 바꾸었다. 이렇게 함으로써 package.json의 start에서 node index.js라는 문장 역시 babel-node index.js라는 문장으로 수정하였다.
-// 이렇게 함으로써 최신 js코드(지금도 최신인가?)로 수정하였다.
 import express from "express";
 import morgan from "morgan";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 
+// const express = require("express");
+// babel을 install 하여서 위의 주석처리된 문장을 밑의 문장으로 바꾸었다. 이렇게 함으로써 package.json의 start에서 node index.js라는 문장 역시 babel-node index.js라는 문장으로 수정하였다.
+// 이렇게 함으로써 최신 js코드(지금도 최신인가?)로 수정하였다.
 const app = express();
-const PORT = 4000;
+// const PORT = 4000;
 
 /* const handleListening = function(){
     console.log(`Listening on: http://localhost:${PORT}`);
@@ -19,7 +19,7 @@ const PORT = 4000;
     res.send("You are on my profile");
 } */
 // 위의 함수들을 arrow_function 방식으로 수정하였다. 둘다 같은 의미인데 다른 방식을 사용한 것 뿐이다. js의 arrow_function 방식이다.
-const handleListening = () => console.log(`Listening on: http://localhost:${PORT}`);
+// const handleListening = () => console.log(`Listening on: http://localhost:${PORT}`);
 
 const handleHome = (req,res) => res.send('Hello from home');
 
@@ -47,4 +47,6 @@ app.get("/", handleHome);
 
 app.get("/profile",handleProfile);
 
-app.listen(PORT, handleListening);
+// app.listen(PORT, handleListening);
+
+export default app;   //누군가 내파일을 불러올 때 app object를 주겠다는 의미

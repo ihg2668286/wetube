@@ -27,4 +27,6 @@ npm install nodemone --D 를 함으로써 수동으로 재시작을 하던것을
         그래서 둘다 필요하다.
     
     index.js -> app.js 로 이름변경
+    app.js를 init.js와 연결
+    nodemone을 init.js로 연결
 }
