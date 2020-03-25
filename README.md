@@ -44,5 +44,5 @@ npm install nodemone --D 를 함으로써 수동으로 재시작을 하던것을
     export default는 파일로 export를 한다는 것
 
     globalRouter.js를 사용하여서 data의 모습에 맞춰서 URL과 함수를 분리하였다.
-    
+    (home,login,logout,search,join)
 }

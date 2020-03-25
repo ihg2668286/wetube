@@ -6,6 +6,7 @@ import bodyParser from "body-parser";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 import globalRouter from "./routers/globalRouter";
+import routes from "./routes";
 
 // const express = require("express");
 // babel을 install 하여서 위의 주석처리된 문장을 밑의 문장으로 바꾸었다. 이렇게 함으로써 package.json의 start에서 node index.js라는 문장 역시 babel-node index.js라는 문장으로 수정하였다.
@@ -52,9 +53,9 @@ app.use(morgan("dev"));
 
 // app.listen(PORT, handleListening);
 
-app.use("/",globalRouter);
-app.use("/user",userRouter);
-app.use("/video",videoRouter);
+app.use(routes.home, globalRouter);
+app.use(routes.users,userRouter);
+app.use(routes.videos,videoRouter);
 // get이 아니라 use를 사용한 이유는 누군가/user 경로에 접속하면 이 router전체를 사용하겠다는 의미이다.
 
 export default app;   //누군가 내파일을 불러올 때 app object를 주겠다는 의미
