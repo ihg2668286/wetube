@@ -29,4 +29,8 @@ npm install nodemone --D 를 함으로써 수동으로 재시작을 하던것을
     index.js -> app.js 로 이름변경
     app.js를 init.js와 연결
     nodemone을 init.js로 연결
+
+    router는 많은 route들이 담긴 파일
+
+    export와 import의 사용법? 학습
 }

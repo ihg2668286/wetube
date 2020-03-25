@@ -3,6 +3,7 @@ import morgan from "morgan";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
+import {userRouter} from "./router"
 
 // const express = require("express");
 // babel을 install 하여서 위의 주석처리된 문장을 밑의 문장으로 바꾸었다. 이렇게 함으로써 package.json의 start에서 node index.js라는 문장 역시 babel-node index.js라는 문장으로 수정하였다.
@@ -48,5 +49,10 @@ app.get("/", handleHome);
 app.get("/profile",handleProfile);
 
 // app.listen(PORT, handleListening);
+
+app.use("/user",userRouter);
+// 하나의 route를 쓰는 대신 router를 가져다가 쓴다. 그래서 import를 했으며 router.js에서 export를 했다.
+// router에서 import를 한 방식과 다른것은 export에서 default를 했느냐 안했느냐이다. router에서 사용한 import는 export에서 default로 export하였기 때문에 일반적으로 import하는 방식으로 사용하였으나, 여기서는 그러지 않았다.
+// get이 아니라 use를 사용한 이유는 누군가/user 경로에 접속하면 이 router전체를 사용하겠다는 의미이다.
 
 export default app;   //누군가 내파일을 불러올 때 app object를 주겠다는 의미
