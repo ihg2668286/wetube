@@ -3,16 +3,20 @@ import morgan from "morgan";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
+import { localsMiddleware } from "./middlewares";
+import routes from "./routes";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 import globalRouter from "./routers/globalRouter";
-import routes from "./routes";
 
 // const express = require("express");
 // babel을 install 하여서 위의 주석처리된 문장을 밑의 문장으로 바꾸었다. 이렇게 함으로써 package.json의 start에서 node index.js라는 문장 역시 babel-node index.js라는 문장으로 수정하였다.
 // 이렇게 함으로써 최신 js코드(지금도 최신인가?)로 수정하였다.
 const app = express();
+
+app.use(helmet());
 app.set('view engine',"pug");
+
 // const PORT = 4000;
 
 /* const handleListening = function(){
@@ -31,11 +35,13 @@ app.set('view engine',"pug");
 // const handleProfile = (req, res) => res.send("You are on my profile");
 
 // .....이부분에 원하는 middleware를 추가하고 그 다음에 route를 추가한다. 순서는 매우 중요하다.
+
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
-app.use(helmet());
 app.use(morgan("dev"));
+
+app.use(localsMiddleware);
 
 /* const middleware = (req,res,next) => {
   res.send("not happening");
