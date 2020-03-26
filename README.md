@@ -104,4 +104,7 @@ npm install nodemone --D 를 함으로써 수동으로 재시작을 하던것을
         템플릿마다 다른 정보를 가질 수도 있으니 필요하다.
         videoController.js, userController.js에서 한 화면에만 변수를 추가(Title을 추가?수정?하였다.)
             render함수의 첫번째 인자는 템플릿, 두번째 인자는 템플릿에 추가할 정보가 담긴 객체
+    
+    search제작
+        videoController.js에서 암시적 리턴대신 리턴값을 넣어야 한다.
 }
