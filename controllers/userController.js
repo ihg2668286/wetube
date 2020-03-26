@@ -6,7 +6,28 @@ export const userDetail = (req, res) => res.send("User Detail");
 export const editProfile = (req, res) => res.send("Edit Profile");
 export const changePassword = (req, res) => res.send("Change Password"); */
 
-export const join = (req, res) => res.render("join", { pageTitle: "Join" });
+import routes from "../routes";
+
+export const getJoin = (req, res) => {
+    res.render("join", { pageTitle: "Join" });
+};
+
+export const postJoin = (req,res)=>{
+    console.log(req.body);      //회원가입한 정보들을 log로 출력
+    
+    const{
+        body:{name,email,password,password2}
+    }=req;
+
+    if(password !== password2 ){
+        res.status(400);
+        res.render("join", { pageTitle: "Join" });
+    }else{
+        // TODO Register User(사용자 등록)
+        // TODO log user in(사용자 로그인이라는 주석도 달아주자. 다시 시도해보자.)
+        res.redirect(routes.home);
+    }
+};
 
 export const login = (req, res) => res.render("login", { pageTitle: "Login" });
 
