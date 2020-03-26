@@ -23,13 +23,16 @@ export const postJoin = (req,res)=>{
         res.status(400);
         res.render("join", { pageTitle: "Join" });
     }else{
-        // TODO Register User(사용자 등록)
-        // TODO log user in(사용자 로그인이라는 주석도 달아주자. 다시 시도해보자.)
+        // TODO: Register User(사용자 등록)
+        // TODO: log user in(사용자 로그인이라는 주석도 달아주자. 다시 시도해보자.)
         res.redirect(routes.home);
     }
 };
 
-export const login = (req, res) => res.render("login", { pageTitle: "Login" });
+export const getLogin = (req, res) => res.render("login", { pageTitle: "Login" });
+export const postLogin = (req, res) => {
+    res.redirect(routes.home);
+}
 
 export const logout = (req, res) => res.render("logout", { pageTitle: "Logout" });
 
