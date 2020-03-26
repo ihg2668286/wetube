@@ -7,7 +7,12 @@ export const editVideo = (req, res) => res.send("Edit Video");
 export const deleteVideo = (req, res) => res.send("Delete Video"); */
 
 // render함수의 첫번째 인자는 템플릿, 두번째 인자는 템플릿에 추가할 정보가 담긴 객체
-export const home = (req, res) => res.render("home", { pageTitle: "Home" });
+// export const home = (req, res) => res.render("home", { pageTitle: "Home" });
+
+import { videos } from "../db";
+export const home = (req, res) => {
+  res.render("home", { pageTitle: "Home", videos });
+};
 
 export const search = (req, res) => {
     // const searchingBy = req.query.term;

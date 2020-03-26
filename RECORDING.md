@@ -110,4 +110,12 @@ npm install nodemone --D 를 함으로써 수동으로 재시작을 하던것을
         | 는 이 안에 들어간 것들을 텍스트로 바꿔준다.
     
     userRouter.js 와 videoRouter.js 이 두파일이 수정이 되있네???? 왜???? 언제????
+        진도 따라잡아서 다 수정함...ㅡㅡ Git보고 복붙해왔
+    
+    home.pug에서
+        each item in videos
+            h1= item.title
+            p= item.description
+        위의 방식은 videos 배열에서 하나씩 item을 처리하는방식
+        template의 videos는 videoController에서 전달한 video와 이름이 같아야 한다.
 }
