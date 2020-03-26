@@ -118,4 +118,20 @@ npm install nodemone --D 를 함으로써 수동으로 재시작을 하던것을
             p= item.description
         위의 방식은 videos 배열에서 하나씩 item을 처리하는방식
         template의 videos는 videoController에서 전달한 video와 이름이 같아야 한다.
+    
+    mixin - pug의 함수의 일종
+        mixin에는 인자가 하나 필요하다.
+        videoBlock
+            mixin에 인자가 입력되면, 그 객체의 이름을 video라고 함.
+            객체가 mixin에 입력되면, 그 객체의 title을 받아와서 화면에 표시
+            home.pug??db.js??(왠지db)의 정보들이 videoBlock으로 전달되어서 함수를 실행. 그리고 그 함수를 html로 내보낸다.
+
+            동영상 재생을 위하여
+                자동재생을 위한 autoplay=true 삽입
+                동영상 재생 및 일시정지 등 컨트롤을 위하여 controls=true 삽입
+                몽땅 자동재생.... 수정요망..;;
+
+        각각 다른 정보를 가지지만 같은 구조를 가지는 데이터를 표시하기 위한 코드를 캡슐화함. 이게 mixin을 사용하는 이유.
+            다른정보, 같은구조
+        
 }
