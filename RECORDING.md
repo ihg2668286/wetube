@@ -138,4 +138,7 @@ npm install nodemone --D 를 함으로써 수동으로 재시작을 하던것을
         home에 mixin구현
         search에 mixin구현
         회원가입 - 비번,비번체크 동일하면 home로 이동 아니면 이동x(400호출)
+    
+    controller들을 수정
+    required=true 을 join,login,upload에 삽입해서 필수값들을 넣지 않으면 동작하지 않게끔 수정
 }
