@@ -103,4 +103,9 @@ npm install nodemone --D 를 함으로써 수동으로 재시작을 하던것을
     
     search제작
         videoController.js에서 암시적 리턴대신 리턴값을 넣어야 한다.
+
+    socailLogin.pug
+        |Continue with Github 이것에서 |을 적지 않으면 에러가 생겨난다.
+        이는 Continu를 하나의 태그로 생각해 버리게 되기 때문이다. 그래서 | 을 삽인한 것이다.
+        | 는 이 안에 들어간 것들을 텍스트로 바꿔준다.
 }
