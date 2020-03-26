@@ -141,4 +141,10 @@ npm install nodemone --D 를 함으로써 수동으로 재시작을 하던것을
     
     controller들을 수정
     required=true 을 join,login,upload에 삽입해서 필수값들을 넣지 않으면 동작하지 않게끔 수정
+
+    mongodb, mongoose설치
+    mongodb - database
+        특징 - NoSQL Database이고 규칙이 적고 엄청 유연해서 많은 부분을 수정가능
+        만약 채팅을 만든다면 mongodb는 적합한 database가 될것이다. 왜냐하면 생성이 매우 빠르고 엄격하지 않기때문
+    mongoose - 데이터베이스와 연결하게 해주는것
 }
