@@ -223,4 +223,27 @@ npm install nodemone --D 를 함으로써 수동으로 재시작을 하던것을
         /uploads/ 이렇게 하면 안된다. 이렇게 하면 내 컴퓨터의 root에 upload를 따로 만들것이다. uploads/ 이렇게 적음으로써 uploads의 폴더내에서 이루어지게 만들었다.
 
         video를 Github에 올리는걸 원하지 않으니 .gitignore에 uploads 를 삽입하라.
+    
+    Video Detail을 보기 위하여
+        routes.js에서
+            const EDIT_VIDEO = "/:id/edit"; 이 문장에서
+                edit라는 parameter로는 어떤 것도 받지 않을 것이다.
+                하지만 id로는 어떤 변수를 받겠지.
+                만약 controller에서 어떤 data를 가지고 있다는 것을 표현하고 싶다면 :과 이름을 넣으면 된다.
+                    <!-- TODO: const VIDEO_DETAIL = "/:id"; 여기 문장에다가..??? 맞나???확인요망 -->
+        
+        params를 가지고 있고 이제 params로부터 id를 가져오자.
+
+        videoController.js에서
+            video의 아이디를 찾아서 Video Detail을 보여주고, 아이디가 잘못된 경우 에러를 출력하고 다시 홈으로 돌아가게끔 설정
+                export const videoDetail = async(req, res) =>{...}이 부분을 말하는 것이다.
+            비디오 변수를 템플릿에 전달
+                res.render("videoDetail", { pageTitle: "Video Detail", video }); 이 문장에서 video는
+                video:video 와 같은 의미이다.
+        
+        videoDetail.pug에서
+            다 새롭게 만든것들임
+            <!-- TODO:Edit Video버튼 만들자 -->
+
+
 }
