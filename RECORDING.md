@@ -221,4 +221,6 @@ npm install nodemone --D 를 함으로써 수동으로 재시작을 하던것을
         middleware.js에서 uploads/ 를 삽입하여서
         const multerVideo = multer({ dest: "uploads/videos/" }); 에렇게 수정
         /uploads/ 이렇게 하면 안된다. 이렇게 하면 내 컴퓨터의 root에 upload를 따로 만들것이다. uploads/ 이렇게 적음으로써 uploads의 폴더내에서 이루어지게 만들었다.
+
+        video를 Github에 올리는걸 원하지 않으니 .gitignore에 uploads 를 삽입하라.
 }
