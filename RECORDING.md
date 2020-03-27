@@ -190,4 +190,28 @@ npm install nodemone --D 를 함으로써 수동으로 재시작을 하던것을
         try
             내가 해야 할 것들 그리고 만약 실패한다면 해당 error를 잡아낼 것이다. 그래야 내가 무슨 error인지 볼 수 있다.
 
+    비디오 파일 삽입위한 과정
+        upload.pug수정
+            Video파일이 아닌 부분은 받지 않도록 하기 위해서 accept="video" 를 삽입해서
+                input(type="file", id="file", name="file", required=true, accept="video/*")이렇게 수정
+        
+            multar
+                file을 Upload하고 URL을 반환하는 middleware
+                나는 file을 보내는 것이다. 그래서 form의 encoding이 달라야 한다.
+                그래서 enctype="multipart/form-data" 이것을 삽입해서
+                    form(action=`/videos${routes.upload}`, method="post", enctype="multipart/form-data") 이렇게 수정
+                
+                multar의사용법은
+                    https://github.com/expressjs/multer/blob/master/README.md 참조
+                
+        middlewares.js수정
+            single은 오직 하나의 파일만 Upload할 수 있다.
+
+        videoRouter.js수정
+            uploadVideo를 삽입해서
+                videoRouter.post(routes.upload, uploadVideo, postUpload); 이렇게 수정
+                
+            우리가 file을 Upload하면 server(middlewares.js????)에 있는 folder(video/)에 Upload
+
+            postUpload라는 function은 해당 file에 접근할 것이다.
 }

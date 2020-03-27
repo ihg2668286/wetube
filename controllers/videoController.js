@@ -15,47 +15,53 @@ import routes from "../routes";
 import Video from "../models/Video";
 
 export const home = async (req, res) => {
-  try{
+  try {
     const videos = await Video.find({});
     // await부분이 끝나기 전까지는 render부분을 실행하지 않을것이다.
     res.render("home", { pageTitle: "Home", videos });
-  }catch(error){
+  } catch (error) {
     console.log(error);
-    res.render("home", { pageTitle: "Home", videos:[] });
+    res.render("home", { pageTitle: "Home", videos: [] });
   }
   // error가 생기면 video는 없을 거고 default로 videos는 빈 배열이 된다.
-
 };
 
 export const search = (req, res) => {
-    // const searchingBy = req.query.term;
-    // 위의 방법은 ES6이전의 방식 더 최근의 방식을 사용해보자. 바로 밑의줄에서 사용
-    const {
-      query: { term: searchingBy }
-    } = req;
+  // const searchingBy = req.query.term;
+  // 위의 방법은 ES6이전의 방식 더 최근의 방식을 사용해보자. 바로 밑의줄에서 사용
+  const {
+    query: { term: searchingBy }
+  } = req;
 
-  res.render("search", { pageTitle: "Search", searchingBy, videos});
+  res.render("search", { pageTitle: "Search", searchingBy, videos });
 };
 
 // export const videos = (req, res) => res.render("videos", { pageTitle: "Videos" });
 
-export const getUpload = (req, res) => res.render("upload", { pageTitle: "Upload" });
+export const getUpload = (req, res) =>
+  res.render("upload", { pageTitle: "Upload" });
 
-export const postUpload = (req, res) =>{
-  const{
-    body:{file, title, description }
+export const postUpload = async (req, res) => {
+  const {
+    body: { title, description },
+    file: { path }
   } = req;
-  
-  //TODO:Upload and save video(비디오 업로드 및 저장)
-  res.redirect(routes.videoDetail(324393));
-};
 
+  const newVideo = await Video.create({
+    fileUrl: path,
+    title,
+    description
+  });
+  console.log(newVideo);
+  
+  res.redirect(routes.videoDetail(newVideo.id));
+};
 
 export const videoDetail = (req, res) =>
   res.render("videoDetail", { pageTitle: "Video Detail" });
 
 export const editVideo = (req, res) =>
   res.render("editVideo", { pageTitle: "Edit Video" });
-  
+
 export const deleteVideo = (req, res) =>
   res.render("deleteVideo", { pageTitle: "Delete Video" });
