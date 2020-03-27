@@ -12,9 +12,19 @@ export const deleteVideo = (req, res) => res.send("Delete Video"); */
 // import { videos } from "../db";
 
 import routes from "../routes";
+import Video from "../models/Video";
 
-export const home = (req, res) => {
-  res.render("home", { pageTitle: "Home", videos });
+export const home = async (req, res) => {
+  try{
+    const videos = await Video.find({});
+    // await부분이 끝나기 전까지는 render부분을 실행하지 않을것이다.
+    res.render("home", { pageTitle: "Home", videos });
+  }catch(error){
+    console.log(error);
+    res.render("home", { pageTitle: "Home", videos:[] });
+  }
+  // error가 생기면 video는 없을 거고 default로 videos는 빈 배열이 된다.
+
 };
 
 export const search = (req, res) => {

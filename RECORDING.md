@@ -169,4 +169,25 @@ npm install nodemone --D 를 함으로써 수동으로 재시작을 하던것을
     DeprecationWarning: current Server Discovery and Monitoring engine is deprecated, and will be removed in a future version. To use the new Server Discover and Monitoring engine, pass option { useUnifiedTopology: true } to the MongoClient constructor.
     라는 문구가 떴다. 이를 확인하니 useUnifiedTopology: true 이 문장이 있어서 db.js에 저 문구를 추가 하였더니 해결됬다.
 
+    Comment를 만드는 두가지 방법
+        ✅1. 모든 CommentID들을 배열로 Video에 집어 넣을것인가??
+            모든 Comment의 정보를 넣는게 아니다. Comment의 ID만 넣는 것이지
+                [1,2,4,7,...]이런 식으로 Video와 연결된 Comment들의 ID가 저장된다.
+        2. Comment에 연결된 Video ID를 줄 것인가??
+    
+    videoController.js수정
+        async
+            'JS야 이 function의 어떤 부분은 꼭 기다려야해' 라고 이야기 하는 것과 같다.
+
+            await
+                해당 과정이 끝날 때까지 잠시 기다려 달라는 의미
+                const videos = await Video.find({});
+                    이렇게 하면 Database에 있는 모든 Video를 가져올 것이다.
+                await는 async에서만 사용가능
+                await부분이 끝나기 전까지는 render부분을 실행하지 않을것이다.
+                    해당 과정이 성공적으로 끝나야 하는것이 아니다. 그냥 끝날 때까지 기다리는것이다.
+        
+        try
+            내가 해야 할 것들 그리고 만약 실패한다면 해당 error를 잡아낼 것이다. 그래야 내가 무슨 error인지 볼 수 있다.
+
 }
