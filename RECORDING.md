@@ -214,4 +214,11 @@ npm install nodemone --D 를 함으로써 수동으로 재시작을 하던것을
             우리가 file을 Upload하면 server(middlewares.js????)에 있는 folder(video/)에 Upload
 
             postUpload라는 function은 해당 file에 접근할 것이다.
+    
+        video를 업로드해도 재생되지 않는다. 파일이 깨져서 그런듯.
+        videos폴더를 삭제 - multar얘가 동영상 업로드시 자동으로 만든 폴더이다. 그래서 경로 자체를 바꾸기 위해 삭제
+
+        middleware.js에서 uploads/ 를 삽입하여서
+        const multerVideo = multer({ dest: "uploads/videos/" }); 에렇게 수정
+        /uploads/ 이렇게 하면 안된다. 이렇게 하면 내 컴퓨터의 root에 upload를 따로 만들것이다. uploads/ 이렇게 적음으로써 uploads의 폴더내에서 이루어지게 만들었다.
 }
