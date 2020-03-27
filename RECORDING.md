@@ -160,4 +160,13 @@ npm install nodemone --D 를 함으로써 수동으로 재시작을 하던것을
         
     .env
         PORT=4000 과 PORT=4000; 는 전혀 다른것... 만약 세미콜론을 입력한다면 전혀 다른 변수가 되버린다.
+
+    MongoDB의 장점
+        document를 줄여준다는 것
+            document -> JSON파일
+    하지만 MongoDB에 나의 파일들이 어떤 식으로 생겨야 할지 알려줘야 한다. 아무거나 생성할 수 없다.
+
+    DeprecationWarning: current Server Discovery and Monitoring engine is deprecated, and will be removed in a future version. To use the new Server Discover and Monitoring engine, pass option { useUnifiedTopology: true } to the MongoClient constructor.
+    라는 문구가 떴다. 이를 확인하니 useUnifiedTopology: true 이 문장이 있어서 db.js에 저 문구를 추가 하였더니 해결됬다.
+
 }
