@@ -148,3 +148,13 @@ npm install nodemone --D 를 함으로써 수동으로 재시작을 하던것을
         만약 채팅을 만든다면 mongodb는 적합한 database가 될것이다. 왜냐하면 생성이 매우 빠르고 엄격하지 않기때문
     mongoose - 데이터베이스와 연결하게 해주는것
 }
+
+3.27{
+    dotenv
+        설치한 이유
+            가끔 어떤 부분을 숨겨놓고 싶을 수 있기 때문
+            
+            지금은 localhost에 설치된 MongoDB이지만 다른 곳에 설치 된다면 어떻게 될까?? 코드에 있는 URL로부터 유저 데이터를 보는걸 원하지 않는다. 이때 dotenv를 사용하는 것이다.
+
+            open_source 프로젝트를 하고있다고 가정을 한다면, 내 Database를 숨겨놓고 싶다. 이 파일을 Github에 올려놓으면 어디에 DB가 있는지 알게 된다. 지금은 localhost라 괜찮지만 실제 Application으로 만들었을 때 문제가 생긴다.
+}
