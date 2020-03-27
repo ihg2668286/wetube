@@ -157,4 +157,7 @@ npm install nodemone --D 를 함으로써 수동으로 재시작을 하던것을
             지금은 localhost에 설치된 MongoDB이지만 다른 곳에 설치 된다면 어떻게 될까?? 코드에 있는 URL로부터 유저 데이터를 보는걸 원하지 않는다. 이때 dotenv를 사용하는 것이다.
 
             open_source 프로젝트를 하고있다고 가정을 한다면, 내 Database를 숨겨놓고 싶다. 이 파일을 Github에 올려놓으면 어디에 DB가 있는지 알게 된다. 지금은 localhost라 괜찮지만 실제 Application으로 만들었을 때 문제가 생긴다.
+        
+    .env
+        PORT=4000 과 PORT=4000; 는 전혀 다른것... 만약 세미콜론을 입력한다면 전혀 다른 변수가 되버린다.
 }
