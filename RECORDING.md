@@ -244,6 +244,54 @@ npm install nodemone --D 를 함으로써 수동으로 재시작을 하던것을
         videoDetail.pug에서
             다 새롭게 만든것들임
             <!-- TODO:Edit Video버튼 만들자 -->
+}
+3.30{
+    Editing a Video
+        routes.js수정
+          editVideo: EDIT_VIDEO,에서
+             editVideo: (id)=>{
+                if(id){
+                return `/videos/${id}/edit`;
+                }else{
+                return EDIT_VIDEO;
+                }
+             }, 이렇게 수정
+    
+        videoDetail.pug수정
+            a(href=routes.editVideo) Edit video 에서
+                a(href=routes.editVideo(video.id)) Edit video 이렇게 수정
 
+            videoRouter.get(routes.editVideo, editVideo); 에서
+                videoRouter.get(routes.editVideo(), getEditVideo); 이렇게 수정
+            
+            유저가 비디오를 수정할 때 비디오를 업로드하는건 원하지 않는다.
+            유저가 비디오를 수정할 때 비디오 파일을 바꾸는건 원하지 않는다.
+            
+            videoRouter.post(routes.editVideo(), postEditVideo);삽입
+        
+        videoController.js수정
+            export const editVideo = (req, res) => res.render("editVideo", { pageTitle: "Edit Video" }); 에서
 
+            export const getEditVideo = async (req, res) => {
+                const {
+                    params: { id }
+                } = req;
+                try {
+                    const video = await Video.findById(id);
+                    res.render("editVideo", { pageTitle: `Edit ${video.title}`, video });
+                } catch (error) {
+                    res.redirect(routes.home);
+                }
+            }; 이렇게 수정
+            
+        editVideo.pug 수정
+            form(action=`/videos${routes.editVideo}`, method="post")에서
+                form(action=routes.editVideo(video.id), method="post")이렇게 수정
+
+            input(type="text", placeholder="Title", name="title")에서
+                input(type="text", placeholder="Title", name="title", value=video.title) 이렇게 수정
+            textarea(name="description", placeholder="Description") 에서
+                textarea(name="description", placeholder="Description")=value=video.description 이렇게 수정
+            
+        위와 같은 작업들을 통해서 Edit video버튼을 눌렀을 때 비디오수정에서 제목과 설명이 현재값을 가지게 되었다. 즉 getEditVideo였다.
 }
