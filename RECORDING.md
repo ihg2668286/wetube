@@ -316,5 +316,45 @@ npm install nodemone --D 를 함으로써 수동으로 재시작을 하던것을
         
         위와 같은 작업을 통해서 EditVideo를 할때 변경한 값들을 저장할 수 있게 되었다. 즉 postEditVideo였다.
 
+    비디오 디테일의 이름수정 - 비디오의 title로 나오도록
+        videoController.js수정
+            export const videoDetail 에서
+                res.render("videoDetail", { pageTitle: "Video Detail", video }); 이것을
+                res.render("videoDetail", { pageTitle: video.title, video }); 이렇게 수정
+        위와 같은 작업을 통해 Title을 비디오의 title로 수정하였다.
+
+    Deleting a Video
+        routes.js 수정
+            deleteVideo: DELETE_VIDEO 에서
+                deleteVideo: (id) => {
+                    if(id){
+                        return `videos/${id}/delete`;
+                    }else{
+                        return DELETE_VIDEO
+                } 이렇게 수정
+
+        editVideo.pug 수정
+            a.form-container__link.form-container__link--delete(href=`/videos${routes.deleteVideo}`) Delete Video 에서
+                a.form-container__link.form-container__link--delete(href=routes.deleteVideo(video.id)) Delete Video 이렇게 수정
+
+        videoRouter.js 수정
+            videoRouter.get(routes.deleteVideo, deleteVideo);에서
+            videoRouter.get(routes.deleteVideo(), deleteVideo);이렇게 수정
+
+        videoController.js수정
+            저장할 필요없으니 비디오 삭제는 get만 있을것이다.
         
+            export const deleteVideo = (req, res) =>{}이부분을
+                export const deleteVideo = async (req, res) =>{
+                    const {
+                        params: { id },
+                    } = req;
+                    try {
+                        await Video.findOneAndRemove({_id:id});
+                    } catch (error) {
+                        res.redirect(routes.home);
+                    }
+                } 이렇게 수정
+
+        위와 같은 작업들을 통해 DeleteVideo를 하였다.
 }
