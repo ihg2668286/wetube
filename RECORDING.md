@@ -294,4 +294,27 @@ npm install nodemone --D 를 함으로써 수동으로 재시작을 하던것을
                 textarea(name="description", placeholder="Description")=value=video.description 이렇게 수정
             
         위와 같은 작업들을 통해서 Edit video버튼을 눌렀을 때 비디오수정에서 제목과 설명이 현재값을 가지게 되었다. 즉 getEditVideo였다.
+
+        videoController.js수정
+            export const postEditVideo = (req, res) => {}; 에서
+
+                export const postEditVideo = async (req, res) => {
+                    const {
+                        params: { id },
+                        // 비디오 수정에서 제목과 설명을 가져와야 하니 body추가
+                        body: { title, description }
+                    } = req;
+                    try {
+                        //밑에서 그냥 await 를 바로 쓴 이유는 새로운 변수로 저장하고 싶지 않다. 업데이트한 결과물은 별로 관심이 없다. 그냥 업데이트 하면 끝. 거기서 정보를 가져오거나 하지 않는다. 그래서 저장하지 않는것.
+                        await Video.findOneAndUpdate({ _id:id }, { title, description });
+                        // 업데이트 하고나서 다시 해당 비디오 페이지로 갔으면 한다. 그래서 바뀐걸 확인
+                        res.redirect(routes.videoDetail(id));
+                    } catch (error) {
+                        res.redirect(routes.home);
+                    }
+                };이렇게 수정
+        
+        위와 같은 작업을 통해서 EditVideo를 할때 변경한 값들을 저장할 수 있게 되었다. 즉 postEditVideo였다.
+
+        
 }

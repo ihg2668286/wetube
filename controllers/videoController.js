@@ -82,7 +82,20 @@ export const getEditVideo = async (req, res) => {
   }
 };
 
-export const postEditVideo = (req, res) => {};
+export const postEditVideo = async (req, res) => {
+  const {
+    params: { id },
+    // 비디오 수정에서 제목과 설명을 가져와야 하니 body추가
+    body: { title, description }
+  } = req;
+  try {
+    await Video.findOneAndUpdate({ _id:id }, { title, description });
+    // 업데이트 하고나서 다시 해당 비디오 페이지로 갔으면 한다. 그래서 바뀐걸 확인
+    res.redirect(routes.videoDetail(id));
+  } catch (error) {
+    res.redirect(routes.home);
+  }
+};
 
 export const deleteVideo = (req, res) =>
   res.render("deleteVideo", { pageTitle: "Delete Video" });
