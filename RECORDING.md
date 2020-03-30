@@ -357,4 +357,66 @@ npm install nodemone --D 를 함으로써 수동으로 재시작을 하던것을
                 } 이렇게 수정
 
         위와 같은 작업들을 통해 DeleteVideo를 하였다.
+    
+    업로드 순서?대로 새로운 비디오가 먼저 나오도록 수정
+       videoController.js에서
+            export const home = async (req, res) => {........}; 에서
+                const videos = await Video.find({}); 이부분을
+                    const videos = await Video.find({}).sort({'_id':-1}); 이렇게 수정
+                    -1을 값으로 주는 이유는 위 아래 순서를 바꾸겠다는 약속 같은것이다. 여기서는 id로 정렬을 했다. 무엇이든지 원하는 것으로 정렬 할 수 있다.
+                    제목으로도 가능하다. 제목으로 하면 알파벳순서로 정렬된다.
+                    지금은 id순서대로 정렬하였다. id순서대로 정렬을 함으로써 최신 비디오가 먼저 나오도록 하였다.
+
+        위의 작업을 통해서 업로드 순서대로 정렬하였다.
+
+    ESLint - Linter는 뭔가 틀린게 있으면 알려주는 것
+
+    Search기능 추가
+        videoController.js에서
+            export const search = (req, res) => {......} 이것을
+
+            export const search = async(req, res) => {
+                // const searchingBy = req.query.term;
+                // 위의 방법은 ES6이전의 방식 더 최근의 방식을 사용해보자. 바로 밑의줄에서 사용
+                const {
+                    query: { term: searchingBy }
+                } = req;
+                // 빈배열의 videos를 만들었고 어떤 videos도 찾지 못한다면 빈 배열로 render될 것이고 비디오를 찾는다면 videos가 reassign되는 것이다.
+                let videos = [];
+                try{
+                    // options의 i는 insensitive 덜 민감하다는 것을 의미(대소문자 구분x)
+                    videos = await Video.find({
+                    title:{$regex:searchingBy, $options:"i"}
+                    });
+                }catch(error){
+                    console.log(error);
+                }
+
+                res.render("search", { pageTitle: "Search", searchingBy, videos });
+            };이렇게 수정
+        위 작업을 통해서 검색기능을 넣었다.
+
+        search.pug에서
+            .search__videos
+                each item in videos
+                    +videoBlock({
+                        title:item.title,
+                        views:item.views,
+                        videoFile:item.videoFile
+                    })  여기에서
+                if videos.length === 0
+                    h5 No Videos Found(비디오를 못찾았다.) 이것을 삽입하고
+                id:item.id 이것을 삽입
+            위 작업을 통해 검색하지 못하였을 경우의 화면을 구성하였으며
+
+    videoDetail.pug에서 댓글의 갯수를 포함시키기 위하여
+        .video__comments
+        if video.comments.length === 1
+            span.video__comment-number 1 comment
+        else
+            span.video__comment-number #{video.comments.length} comments 
+        이것들을 삽입
+            왜냐하면 댓글이 없으면 댓글이 없다고 알려주고 싶고, 댓글이 2개 있으면 댓글이 2개있다고 알려주고 싶다. 그리고 1개일 때도 확인하고 싶다.
+            그런데 1comment"s"가 되게 할수는 없으니 1일때와 그렇지 않을때의 조건문이 들어가 있는 것이다.
+
 }

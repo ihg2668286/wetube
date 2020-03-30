@@ -16,7 +16,11 @@ import Video from "../models/Video";
 
 export const home = async (req, res) => {
   try {
-    const videos = await Video.find({});
+
+    /* -1을 값으로 주는 이유는 위 아래 순서를 바꾸겠다는 약속 같은것이다. 여기서는 id로 정렬을 했다. 무엇이든지 원하는 것으로 정렬 할 수 있다.
+    제목으로도 가능하다. 제목으로 하면 알파벳순서로 정렬된다.
+    지금은 id순서대로 정렬하였다. id순서대로 정렬을 함으로써 최신 비디오가 먼저 나오도록 하였다. */
+    const videos = await Video.find({}).sort({'_id':-1});
     // await부분이 끝나기 전까지는 render부분을 실행하지 않을것이다.
     res.render("home", { pageTitle: "Home", videos });
   } catch (error) {
@@ -26,12 +30,22 @@ export const home = async (req, res) => {
   // error가 생기면 video는 없을 거고 default로 videos는 빈 배열이 된다.
 };
 
-export const search = (req, res) => {
+export const search = async(req, res) => {
   // const searchingBy = req.query.term;
   // 위의 방법은 ES6이전의 방식 더 최근의 방식을 사용해보자. 바로 밑의줄에서 사용
   const {
     query: { term: searchingBy }
   } = req;
+  // 빈배열의 videos를 만들었고 어떤 videos도 찾지 못한다면 빈 배열로 render될 것이고 비디오를 찾는다면 videos가 reassign되는 것이다.
+  let videos = [];
+  try{
+    // options의 i는 insensitive 덜 민감하다는 것을 의미(대소문자 구분x)
+    videos = await Video.find({
+      title:{$regex:searchingBy, $options:"i"}
+    });
+  }catch(error){
+    console.log(error);
+  }
 
   res.render("search", { pageTitle: "Search", searchingBy, videos });
 };
@@ -103,7 +117,9 @@ export const deleteVideo = async (req, res) =>{
   } = req;
   try {
     await Video.findOneAndRemove({_id:id});
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
   
   res.redirect(routes.home);
 };
