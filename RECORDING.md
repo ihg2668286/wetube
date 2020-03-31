@@ -418,5 +418,35 @@ npm install nodemone --D 를 함으로써 수동으로 재시작을 하던것을
         이것들을 삽입
             왜냐하면 댓글이 없으면 댓글이 없다고 알려주고 싶고, 댓글이 2개 있으면 댓글이 2개있다고 알려주고 싶다. 그리고 1개일 때도 확인하고 싶다.
             그런데 1comment"s"가 되게 할수는 없으니 1일때와 그렇지 않을때의 조건문이 들어가 있는 것이다.
+}
+3.31{
+    Webpack
+        webpack는 두가지를 가지고 있다.
+            1. entry -> 파일들이 어디에서 왔는가?
+            2. output -> 그걸 어디에 넣을 것인가?
+        
+        webpack.config.js 생성
+            __dirname 은 현재의 프로젝트 디렉토리 이름이다. 이것은 어디에서든 접근 가능한 Node.js 전역변수이다.
+        
+            sass-loader는 Sass를 CSS로 옮겨 주고,
+            postcss-loader는 특정 plugin들을 CSS에 대해 실행시켜 주고,
+            css-loader는 CSS를 가져와주고,
+            ExtractCSS로 그 부분만 추출해주는 것이다.
+        
+        package.json수정
+            윈도우여서 그런지
+                "dev:assets": "set WEBPACK_ENV=development&&webpack",
+                "build:assets": "set WEBPACK_ENV=production&&webpack"
+                이런식으로 set을 삽입해야한다. 이유는 모르겠다...
 
+        npm run dev:assets 를 터미널에 입력하여서 static라는 폴더와 그안의 main.js styles.css를 생성하였다.
+
+        assets/js,scss 폴더생성
+            js
+                main.js 생성
+            scss
+                styles.scss 생성
+                config 폴더생성
+                    _variables.scss 생성
+        
 }
