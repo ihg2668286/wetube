@@ -5,16 +5,18 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev:server": "nodemon --exec babel-node init.js",
-    "dev:assets": "set WEBPACK_ENV=development&&webpack",
-    "build:assets": "set WEBPACK_ENV=production&&webpack"    
+    "dev:assets": "set WEBPACK_ENV=development&&webpack -w",
+    "build:assets": "set WEBPACK_ENV=production&&webpack"
   },
   "author": "HyunGyu",
   "license": "ISC",
   "dependencies": {
     "@babel/core": "^7.9.0",
     "@babel/node": "^7.8.7",
+    "@babel/polyfill": "^7.8.7",
     "@babel/preset-env": "^7.9.0",
     "autoprefixer": "^9.7.5",
+    "babel-loader": "^8.1.0",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
     "css-loader": "^3.4.2",

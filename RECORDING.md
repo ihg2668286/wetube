@@ -448,5 +448,44 @@ npm install nodemone --D 를 함으로써 수동으로 재시작을 하던것을
                 styles.scss 생성
                 config 폴더생성
                     _variables.scss 생성
+    위와같은 작업으로 Webpack생성??
+
+    ES6 with Webpack
+        js폴더의 main.js 수정
+            깃 커밋보고 머가 바꼈나 보자 이제... 일일이 안칠게
+        webpack.config.js 수정
+            깃 커밋보고 머가 바꼈나 보자 이제... 일일이 안칠게
+
+            use에는 내가 뭘 사용할지를 쓴다. 여러가지를 쓸 수 있지만, 여기선 하나만 쓸것이다.
+        package.json 수정
+            dev:assets에 -w을 삽입하여서 파일을 지켜보도록(watch)할 것이다.
+                왜냐하면 CSS파일을 수정할 때마다 webpack을 끄고 다시 실행시켜주고... 그런 짓을 하고 싶지 않기 때문이다.
+                -w을 붙여줌으로써 이것은 파일들을 지켜보게 될것이다.
+                즉, 파일들을 지켜보고 있다가 만약 변화가 생기면 webpack을 다시 실행시켜 줄것이다.
+
+        layouts폴더의 main.pug 수정
+            새로운 stylesheet파일을 연결하기 위해서
+        app.js 수정
+            누군가 /static으로 가려고 하면, static폴더로 가도록 하기 위해서 (main.pug를 수정했으니 그에 맞춰서 수정)
+
+        webpack
+            entry가 있고,
+            mode(development or production)가 있고,
+            rules가 있고, 각종 loader들이 있다.
+            그리고 output이 있다.
         
+        regeneratorRuntime이 정의되지 않았다.
+            왜냐하면 구글 크롬이 아직 js폴더의 main.js의 async를 어떻게 처리해야하는지 모르기 때문이다.(아무것도 적혀있지 않으니 당연한 결과일지도?)
+            
+            그래서 polyfill을 설치, babel-polyfill 이라는 것을 설치
+                babel-polyfill 이란??
+                    polyfill(충전솜)인데, 브라우저에 아직 없는 무언가를 보유하고 있는 것이다. 브라우저의 구멍을 메워주는 자바스크립트 파일 같은것이다.
+                    아직 브라우저에 없는 무언가를 모방할 거라는 것.
+
+                webpack.fonfig.js수정
+                    webpack의 설정(config)에 변화를 줬기 때문에, dev:assets를 다시 실행시켜야 한다.
+        .gitignore 수정
+            static를 깃헙에 업로드하고 싶지 않아서
+    위의 작업들을 통해 webpack은 다 본것 같다. 본건 많이 없지만...;
+    위의 작업들은 환경설정에 대한 것이라고 생각하자.
 }
